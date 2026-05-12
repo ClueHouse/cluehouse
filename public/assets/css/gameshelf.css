@@ -52,7 +52,6 @@ body {
   width:100%;
   margin:0 auto;
   padding:4.45rem 2rem 1.1rem 2rem;
-  box-sizing:border-box;
   min-height:100vh;
   display:flex;
   flex-direction:column;
@@ -157,7 +156,7 @@ header.chw-header{
   border-radius:1.6rem;
   text-align:center;
   margin:0 auto 1.6rem;
-  background: linear-gradient(135deg,#1a110a,#50341c 30%,#b88b54 50%,#50341c 70%,#1a110a 100%);
+  background:linear-gradient(135deg,#1a110a,#50341c 30%,#b88b54 50%,#50341c 70%,#1a110a 100%);
   border:1px solid #f3d4a8;
   box-shadow:
     0 14px 40px rgba(0,0,0,0.85),
@@ -208,8 +207,8 @@ header.chw-header{
     rgba(3,20,14,0.97);
   border:1px solid rgba(212,236,214,0.3);
   box-shadow:0 10px 26px rgba(0,0,0,0.85);
-  box-sizing:border-box;
   overflow:hidden;
+  cursor:default;
   animation:chwFadeUp 0.55s ease-out both;
 }
 
@@ -224,19 +223,59 @@ header.chw-header{
 .chw-icon{
   flex:0 0 6.9rem;
   width:6.9rem;
+  padding-top:0.15rem;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  overflow:visible;
 }
 
 .chw-icon img{
   width:100%;
+  max-height:5.4rem;
   height:auto;
+  object-fit:contain;
+  object-position:left top;
   display:block;
+  transition:transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+  transform-origin:left top;
+}
+
+.chw-game-row--winterword .chw-icon img{
+  width:4.8rem;
+  transform:scale(1.75);
+}
+
+.chw-game-row--10shot .chw-icon img,
+.chw-game-row--thegrid .chw-icon img,
+.chw-game-row--suddendeath .chw-icon img{
+  width:6.24rem;
+  transform:scale(1.2);
+}
+
+.chw-game-row:hover:not(.chw-coming-soon) .chw-icon img{
+  transform:scale(1.2) translateY(-1px);
+  filter:drop-shadow(0 0 10px rgba(240,189,125,0.8));
+}
+
+.chw-game-row--winterword:hover:not(.chw-coming-soon) .chw-icon img{
+  transform:scale(1.85) translateY(-1px);
+  filter:drop-shadow(0 0 10px rgba(240,189,125,0.8));
+}
+
+.chw-game-row--winterword .chw-game-info{
+  margin-left:0.35rem;
 }
 
 .chw-game-info{
   display:flex;
   flex-direction:column;
   gap:0.25rem;
+  height:100%;
   min-width:0;
+  transition:opacity 0.22s ease, filter 0.22s ease;
+  position:relative;
+  z-index:2;
 }
 
 .chw-game-title{
@@ -249,6 +288,7 @@ header.chw-header{
   font-size:0.9rem;
   font-weight:500;
   color:var(--chw-brass-soft);
+  opacity:0.96;
   margin:0;
 }
 
@@ -267,20 +307,98 @@ header.chw-header{
   font-size:0.8rem;
 }
 
+.chw-cta-tagline{
+  margin:0;
+  color:var(--chw-muted);
+}
+
 .chw-cta-link{
+  display:inline-block;
+  margin-top:0.15rem;
+  font-weight:500;
   color:var(--chw-brass-soft);
   text-decoration:none;
+  letter-spacing:0.04em;
+  cursor:pointer;
 }
 
 .chw-cta-link:hover{
   text-decoration:underline;
+  text-underline-offset:2px;
+  text-shadow:0 0 10px rgba(240,189,125,0.7);
 }
 
+/* COMING SOON — idle state */
 .chw-coming-soon{
+  cursor:default;
   position:relative;
   background:
     radial-gradient(circle at 0 0,rgba(186,228,201,0.045),transparent 62%),
     rgba(0,6,4,0.992);
+  border-color:rgba(212,236,214,0.10);
+  box-shadow:0 12px 34px rgba(0,0,0,0.95);
+}
+
+.chw-coming-soon > *{
+  position:relative;
+  z-index:2;
+}
+
+.chw-coming-soon .chw-game-title{
+  opacity:0.88;
+}
+
+.chw-coming-soon .chw-game-subtitle{
+  opacity:0.82;
+}
+
+.chw-coming-soon .chw-game-body{
+  opacity:0.80;
+  color:rgba(194,177,164,0.88);
+}
+
+.chw-coming-soon .chw-icon img{
+  opacity:0.78;
+  filter:saturate(0.85) contrast(0.92) brightness(0.82);
+}
+
+.chw-coming-soon::before{
+  content:"";
+  position:absolute;
+  inset:0.1rem;
+  border-radius:inherit;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(240,189,125,0.08),transparent 58%),
+    radial-gradient(circle at 82% 8%,rgba(240,189,125,0.07),transparent 58%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(160,210,220,0.032) 0,
+      rgba(160,210,220,0.032) 1px,
+      transparent 1px,
+      transparent 22px
+    ),
+    linear-gradient(180deg,rgba(0,0,0,0.72),rgba(0,0,0,0.97));
+  pointer-events:none;
+  z-index:1;
+}
+
+/* COMING SOON — hover reveal */
+.chw-coming-soon:hover,
+.chw-coming-soon:focus-within{
+  border-color:rgba(240,189,125,0.9);
+  box-shadow:0 16px 42px rgba(0,0,0,0.95);
+}
+
+.chw-coming-soon:hover .chw-icon img,
+.chw-coming-soon:focus-within .chw-icon img{
+  opacity:1;
+  filter:drop-shadow(0 0 12px rgba(240,189,125,0.55));
+}
+
+.chw-coming-soon:hover .chw-game-info,
+.chw-coming-soon:focus-within .chw-game-info{
+  opacity:0;
+  filter:blur(1px);
 }
 
 .chw-comingsoon-label{
@@ -288,16 +406,32 @@ header.chw-header{
   left:0;
   right:0;
   top:67%;
+  transform:translateY(5%);
   text-align:center;
   font-size:1.55rem;
   font-weight:700;
   letter-spacing:0.28em;
+  text-transform:uppercase;
   color:var(--chw-brass-soft);
+  opacity:0;
+  text-shadow:
+    0 0 24px rgba(240,189,125,1),
+    0 0 34px rgba(0,0,0,0.85);
+  transition:opacity 0.35s ease-out, transform 0.35s ease-out;
+  pointer-events:none;
+  z-index:3;
+}
+
+.chw-coming-soon:hover .chw-comingsoon-label,
+.chw-coming-soon:focus-within .chw-comingsoon-label{
+  opacity:0.95;
+  transform:translateY(0);
 }
 
 .chw-knight-wrap{
   width:100%;
   max-width:420px;
+  margin-right:0;
   margin-top:1.5rem;
 }
 
@@ -305,6 +439,9 @@ header.chw-header{
   width:100%;
   height:auto;
   display:block;
+  filter:
+    drop-shadow(0 26px 55px rgba(0,0,0,0.95))
+    drop-shadow(0 0 18px rgba(0,0,0,0.8));
 }
 
 .chw-footer{
@@ -313,6 +450,7 @@ header.chw-header{
   border-top:1px solid rgba(255,255,255,0.08);
   display:flex;
   justify-content:flex-end;
+  flex-shrink:0;
 }
 
 .chw-footer-right{
@@ -322,6 +460,7 @@ header.chw-header{
   display:flex;
   flex-direction:column;
   align-items:flex-end;
+  text-align:right;
   gap:0.35rem;
   font-size:0.74rem;
   color:rgba(194,177,164,0.92);
@@ -331,28 +470,56 @@ header.chw-header{
   font-weight:600;
   letter-spacing:0.22em;
   text-transform:uppercase;
+  color:rgba(253,247,239,0.90);
 }
 
 .chw-footer-links{
   display:inline-flex;
   align-items:center;
+  justify-content:flex-end;
+  gap:0;
 }
 
 .chw-footer a,
 .chw-footer button{
   color:inherit;
   text-decoration:none;
+  font:inherit;
   background:none;
   border:0;
+  padding:0;
   cursor:pointer;
 }
 
+.chw-footer a:hover,
+.chw-footer button:hover{
+  color:rgba(253,247,239,0.95);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+
 .chw-footer-dot{
+  display:inline-block;
   padding:0 0.6rem;
+  opacity:0.75;
+  transform:translateY(-0.5px);
 }
 
 .chw-legal{
   position:relative;
+  display:inline-flex;
+  align-items:center;
+}
+
+.chw-legal-toggle{
+  appearance:none;
+  border:0;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  color:inherit;
 }
 
 .chw-legal-menu{
@@ -362,24 +529,44 @@ header.chw-header{
   min-width:170px;
   border-radius:0.75rem;
   padding:0.45rem 0.65rem;
-  background:rgba(5,20,14,0.98);
+  background:
+    radial-gradient(circle at 0 0,rgba(186,228,201,0.14),transparent 60%),
+    rgba(5,20,14,0.98);
   border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 16px 34px rgba(0,0,0,0.65);
   opacity:0;
+  transform:translateY(8px);
   pointer-events:none;
-  transition:opacity 0.14s ease;
-}
-
-.chw-legal:hover .chw-legal-menu{
-  opacity:1;
-  pointer-events:auto;
+  transition:opacity 0.14s ease, transform 0.14s ease;
+  z-index:20;
+  text-align:right;
+  white-space:nowrap;
 }
 
 .chw-legal-menu a{
   display:block;
   padding:0.35rem 0.2rem;
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--chw-text);
+  font-size:0.76rem;
 }
 
-@media (max-width: 1200px){
+.chw-legal-menu a:hover,
+.chw-legal-menu a:focus-visible{
+  background:rgba(186,228,201,0.10);
+  text-decoration:none;
+  outline:none;
+}
+
+.chw-legal:hover .chw-legal-menu,
+.chw-legal:focus-within .chw-legal-menu{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+@media (max-width:1200px){
   .chw-header-left{
     margin-left:0;
   }
@@ -389,7 +576,7 @@ header.chw-header{
   }
 }
 
-@media (max-width: 900px){
+@media (max-width:900px){
   .chw-main{
     flex-direction:column;
   }
@@ -411,7 +598,7 @@ header.chw-header{
   }
 }
 
-@media (max-width: 600px){
+@media (max-width:600px){
   .chw-shell{
     padding:2rem 1rem;
   }
