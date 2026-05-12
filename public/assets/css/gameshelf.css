@@ -241,6 +241,11 @@ header.chw-header{
   transform-origin:left top;
 }
 
+.chw-game-row--winterword .chw-icon{
+  padding-top:0;
+  transform:translateY(-0.35rem);
+}
+
 .chw-game-row--winterword .chw-icon img{
   width:4.8rem;
   transform:scale(1.75);
@@ -328,7 +333,6 @@ header.chw-header{
   text-shadow:0 0 10px rgba(240,189,125,0.7);
 }
 
-/* COMING SOON — idle state */
 .chw-coming-soon{
   cursor:default;
   position:relative;
@@ -382,7 +386,6 @@ header.chw-header{
   z-index:1;
 }
 
-/* COMING SOON — hover reveal */
 .chw-coming-soon:hover,
 .chw-coming-soon:focus-within{
   border-color:rgba(240,189,125,0.9);
