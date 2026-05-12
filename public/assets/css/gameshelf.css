@@ -1,4 +1,4 @@
-transform:translateY(-0.6rem);:root {
+:root {
   --chw-bg-deep:#020a07;
   --chw-bg-mid:#071710;
   --chw-bg-top:#113326;
@@ -243,7 +243,7 @@ header.chw-header{
 
 .chw-game-row--winterword .chw-icon{
   padding-top:0;
-  transform:translateY(-0.35rem);
+  transform:translateY(-0.6rem);
 }
 
 .chw-game-row--winterword .chw-icon img{
