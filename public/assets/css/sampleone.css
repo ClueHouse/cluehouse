@@ -171,6 +171,14 @@ html,body{
   animation:chChildToIdleUi 4s ease forwards;
 }
 
+/* SLOWER HOVER BRIGHTENING */
+.ch-left,
+.ch-leftTop,
+.ch-leftWhisper,
+.ch-leftUi{
+  transition:opacity 1.4s cubic-bezier(.22,.61,.36,1);
+}
+
 .ch-left:hover,
 .ch-left:focus-within{
   animation:none;
