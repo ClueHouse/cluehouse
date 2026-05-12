@@ -45,7 +45,6 @@ html,body{
   overflow:hidden;
 }
 
-/* LEFT */
 .ch-left{
   position:relative;
   z-index:2;
@@ -79,10 +78,10 @@ html,body{
   content:"";
   position:absolute;
   inset:0;
-  z-index:0;
+  z-index:3;
   pointer-events:none;
   opacity:1;
-  transition:opacity 1.1s cubic-bezier(.22,.61,.36,1);
+  transition:opacity 1.6s cubic-bezier(.22,.61,.36,1);
   background:linear-gradient(
     180deg,
     rgba(0,0,0,var(--idleDim)),
@@ -97,7 +96,7 @@ html,body{
 
 .ch-leftScroll{
   position:relative;
-  z-index:1;
+  z-index:4;
   overflow-y:auto;
   overflow-x:hidden;
   padding-right:10px;
@@ -122,19 +121,19 @@ html,body{
 
 .ch-leftTop{
   position:relative;
-  z-index:1;
+  z-index:4;
 }
 
 .ch-leftWhisper{
   position:relative;
-  z-index:1;
+  z-index:4;
   margin-top:18px;
 }
 
 .ch-leftUi{
   opacity:1;
   position:relative;
-  z-index:2;
+  z-index:5;
   justify-self:center;
   align-self:end;
   width:100%;
@@ -246,7 +245,6 @@ html,body{
   text-decoration:none;
 }
 
-/* RIGHT */
 .ch-right{
   position:relative;
   z-index:1;
@@ -281,7 +279,6 @@ html,body{
     0 0 0 1px rgba(255,255,255,.10);
 }
 
-/* CLICKABILITY PATCH */
 .ch-leftUi,
 .ch-answerRow,
 #answerField,
